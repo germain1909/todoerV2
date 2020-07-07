@@ -17,7 +17,7 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.engimax1.todoerV2"
     },
     "web": {
       "favicon": "./assets/favicon.png"
