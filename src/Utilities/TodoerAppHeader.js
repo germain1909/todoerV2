@@ -10,7 +10,7 @@ const StyledHeader = styled.View`
 backgroundColor: ${colors.medium};
 flexDirection: column;
 flex:1;
-padding: 21px 7px 7px 7px;
+padding: 2px 2px 2px 2px;
 `;
 
 const SelectButtonButtonContainer = styled.TouchableOpacity`
@@ -43,16 +43,12 @@ const AppHeaderNameText = styled.Text`
 
 export function TodoerAppHeader(){
 
-    const [loaded] = Font.useFonts({
-        'bangersFont': require('../../assets/fonts/bangers_regular.ttf'),
-      });
-
     return(
     <StyledHeader >
-        <View style={{flexDirection: 'row',flex: 1          ,justifyContent:"center"}}>
-                <AppHeaderNameText style={{fontFamily:"bangersFont", fontSize:35, color:"white"}}>TODOER</AppHeaderNameText>
+        <View style={{flexDirection: 'row', flex:1, justifyContent:"center"}}>
+                <AppHeaderNameText style={{fontFamily:"Kohinoor Bangla", fontSize:35, color:"white"}}>TODOER</AppHeaderNameText>
         </View>
-        <View style={{flexDirection: 'row',flex: 5}} >
+        <View style={{flexDirection: 'row',flex: 1}} >
             <SelectButtonButtonContainer><StyledButtonText>Select</StyledButtonText></SelectButtonButtonContainer>
             <CalendarsTextContainer><StyledButtonText>Calendars(0)</StyledButtonText></CalendarsTextContainer>
             <AddButtonButtonContainer><StyledButtonText>Add Calendar</StyledButtonText></AddButtonButtonContainer>

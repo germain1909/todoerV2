@@ -63,9 +63,13 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator>
-      <Tab.Screen name="Calendars" component={CalendarScreen} />
+        <Tab.Screen name="Calendars" component={FlexScreen} />
         <Tab.Screen name="All Events" component={EventsScreen} />
-        <Tab.Screen name="Lists" component={FlexScreen} />
+        <Tab.Screen name="Lists" component={ListScreen} />
+        {/* <Tab.Screen name="Calendars" component={CalendarScreen} />
+        <Tab.Screen name="All Events" component={EventsScreen} />
+        <Tab.Screen name="Lists" component={FlexScreen} /> */}
+        
       </Tab.Navigator>
     </NavigationContainer>
     
