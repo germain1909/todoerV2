@@ -1,11 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import styled from 'styled-components/native'
-import {CalendarScreen} from './src/Screens/CalendarsScreen.js'
+// import {CalendarScreen} from './src/Screens/CalendarsScreen.js'
 import {FlexScreen} from './src/Screens/FlexScreen.js'
+import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import {colors} from './src/Utilities/colors'
+import {ListScreen} from './src/Screens/ListScreen'
+
 
 
 
@@ -35,17 +39,29 @@ function EventsScreen() {
       <Text>Events</Text>
       <StyledText>Text</StyledText>
       <ButtonContainer><StyledButtonText>Text</StyledButtonText></ButtonContainer>
+      <CalendarList/>
     </View>
   );
 }
 
-function ListScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Your Lists</Text>
-    </View>
-  );
-}
+// function ListScreen() {
+//   return (
+//     <SafeAreaView style={{
+//       flex: 1,
+//       flexDirection: 'column', //column is the default
+//       justifyContent: 'flex-start',
+//       width:"100%",
+//       height:"100%",
+//       backgroundColor:colors.light
+//   }}>
+// {/* A note thhat you can also use flex her instead of height and width in the out row view just use flex:1 in both spots */}
+//       <View style={styles.card}>
+//               <TextInput style={styles.input} placeholder="Add an item!" />
+//       </View>
+
+//   </SafeAreaView>
+//   );
+// }
 
 
 
@@ -63,8 +79,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen name="Calendars" component={FlexScreen} />
-        <Tab.Screen name="All Events" component={EventsScreen} />
+        <Tab.Screen name="Calendars" component={EventsScreen} />
+        <Tab.Screen name="All Events" component={FlexScreen} />
         <Tab.Screen name="Lists" component={ListScreen} />
         {/* <Tab.Screen name="Calendars" component={CalendarScreen} />
         <Tab.Screen name="All Events" component={EventsScreen} />

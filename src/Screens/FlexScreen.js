@@ -182,13 +182,13 @@ function FlexMultipleRowsTodoerHeader () {
                   <TodoerAppHeader></TodoerAppHeader>
                 </View>
 
-                <View style={{flexDirection: 'row',flex: 1}}>
+                <View style={{flexDirection: 'row',flex: 2}}>
                     <View style={{flex:1, backgroundColor: 'powderblue'}} />
                     <View style={{ flex:1, width: "50%" , height: "50%", backgroundColor: 'skyblue'}} />
                     <View style={{flex:1, backgroundColor: 'steelblue'}} />
                 </View>
 
-                <View style={{flexDirection: 'row', flex:1}}>
+                <View style={{flexDirection: 'row', flex:2}}>
                     <View style={{flex:1, backgroundColor: 'powderblue'}} />
                     <View style={{ flex:1, width: "50%" , height: "50%", backgroundColor: 'skyblue'}} />
                     <View style={{flex:1, backgroundColor: 'steelblue'}} />

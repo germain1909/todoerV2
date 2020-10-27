@@ -15,18 +15,17 @@ padding: 2px 2px 2px 2px;
 
 const SelectButtonButtonContainer = styled.TouchableOpacity`
 	border-radius: 10px;	
-    color:white;
     flex:2;
     alignItems:flex-start;
 `;
 
 const AddButtonButtonContainer = styled.TouchableOpacity`
-    color:white;
     flex:2;
     alignItems:flex-end;
 `;
 
 const CalendarsTextContainer = styled.View`
+    flex:2;
     alignItems:center;
 `;
 
