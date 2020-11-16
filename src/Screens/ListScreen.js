@@ -9,7 +9,8 @@ import {
   TextInput,
   ScrollView,
   TouchableHighlight,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Button
 } from "react-native";
 import styled from "styled-components/native";
 import { colors } from "../Utilities/colors";
@@ -18,6 +19,8 @@ import { TodoInsert } from "../Components/TodoListComponents/TodoInsert";
 import { TodoList } from "../Components/TodoListComponents/TodoList";
 import { useDatabase } from "../Utilities/database/useDatabase";
 import { ListOfList } from "../Components/TodoListComponents/ListOfList";
+import { createStackNavigator } from "@react-navigation/stack";
+
 
 const TodoListCardContainer = styled.View`
   backgroundcolor: ${colors.dark};
@@ -49,21 +52,21 @@ const ModalTextInput = styled.TextInput`
 `;
 
 const KeyboardDismiss = styled.TouchableWithoutFeedback`
-backgroundColor: ${colors.light};
+  backgroundColor: ${colors.light};
   height: 100px;
   width: 500px;
 `;
 
+const RootStack = createStackNavigator()
 
-
-
-export function ListScreen() {
+export function ListComponent({ navigation }) {
   const [addListModalVisible, setAddListModalVisible] = useState(false);
 
   useDatabase();
 
   const handleAddList = () => {
-    setAddListModalVisible(true);
+    // setAddListModalVisible(true);
+    navigation.navigate('MyModal');
   };
 
   return (
@@ -99,63 +102,58 @@ export function ListScreen() {
         </TodoListCardContainer>  */}
         <ListOfList></ListOfList>
       </View>
-      <View>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={addListModalVisible}
-          onRequestClose={() => {
-            alert("Modal has been closed.");
-          }}
-        >
-          <View
-            style={{
-              height: "90%",
-              marginTop: "auto",
-              backgroundColor: colors.dark,
-              borderTopLeftRadius: 20,
-              borderTopRightRadius: 20,
-              overflow: "hidden",
-              padding: 10,
-            }}
-          >
-            <View>
-                <TouchableHighlight
-                  onPress={() => {
-                    setAddListModalVisible(!addListModalVisible);
-                  }}
-                >
-                  <Text>Hide Modal</Text>
-                </TouchableHighlight>
-              </View>
-              <View style={{ flex: 2 }}>
-                <ModalTextInputLabel>Title of List</ModalTextInputLabel>
-                <KeyboardDismiss>
-                <ModalTextInput/>
-                </KeyboardDismiss>
-              </View>
-              <View style={{ flex: 2 }}>
-                <ModalTextInputLabel>Purpose of List</ModalTextInputLabel>
-                <ModalTextInput/>
-              </View>
-              <View style={{ flex: 6 }}>
-                <ScrollView>
-                <ModalTextInputLabel>Add your first 5 todos. Add more todos after you hit the Done Button</ModalTextInputLabel>
-                  <ModalTextInputLabelAddListItem>Item 1</ModalTextInputLabelAddListItem>
-                  <ModalTextInput/>
-                  <ModalTextInputLabelAddListItem>Item 2</ModalTextInputLabelAddListItem>
-                  <ModalTextInput/>
-                  <ModalTextInputLabelAddListItem>Item 3</ModalTextInputLabelAddListItem>
-                  <ModalTextInput/>
-                  <ModalTextInputLabelAddListItem>Item 4</ModalTextInputLabelAddListItem>
-                  <ModalTextInput/>
-                  <ModalTextInputLabelAddListItem>Item 5</ModalTextInputLabelAddListItem>
-                  <ModalTextInput/>
-                </ScrollView>
-            </View>
-          </View>
-        </Modal>
-      </View>
     </SafeAreaView>
+  );
+}
+
+export function ListScreen() {
+  return (
+    <RootStack.Navigator mode="modal" screenOptions={{
+      headerShown: false,
+      cardStyle: { backgroundColor: 'transparent' }
+    }} >
+      <RootStack.Screen name="MyList" component={ListComponent} />
+      <RootStack.Screen name="MyModal" component={ModalScreen} />
+    </RootStack.Navigator>
+  );
+}
+
+function ModalScreen({ navigation }) {
+  return (
+    <View
+    style={{
+      height: "88%",
+      marginTop: "auto",
+      backgroundColor: colors.dark,
+      borderTopLeftRadius: 20,
+      borderTopRightRadius: 20,
+      overflow: "hidden",
+      padding: 10,
+    }}
+    >
+      { console.log('HI')}
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Text style={{ fontSize: 30 }}>This is a modal!</Text>
+        {/* <Button onPress={() => navigation.goBack()} title="Dismiss" /> */}
+      </View>
+
+      <View style={{ flex: 2 }}>
+        <ModalTextInputLabel>Title of List</ModalTextInputLabel>
+        <KeyboardDismiss>
+          <ModalTextInput />
+        </KeyboardDismiss>
+      </View>
+      <View style={{ flex: 2 }}>
+        <ModalTextInputLabel>Purpose of List</ModalTextInputLabel>
+        <ModalTextInput />
+      </View>
+      <View style={{ flex: 6 }}>
+        <ScrollView>
+          <ModalTextInputLabel>
+            Add your first 5 todos. Add more todos after you hit the Done Button
+          </ModalTextInputLabel>
+        </ScrollView>
+      </View>
+    </View>
   );
 }
