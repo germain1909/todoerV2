@@ -34,6 +34,7 @@ const db = SQLite.openDatabase('db.todoer');
             const create_table_query = `CREATE TABLE IF NOT EXISTS lists(listid INTEGER PRIMARY KEY AUTOINCREMENT,
                 listname TEXT,
                 createdby TEXT,
+                reason TEXT,
                 createddate INTEGER,
                 updateddate INTEGER
                  )`;
@@ -57,13 +58,13 @@ const db = SQLite.openDatabase('db.todoer');
     };
 
     const insertList = () => {
-        const insert_query = `INSERT INTO lists (listname, createdby, createddate, updateddate) values (?, ?, ?, ?)`;
+        const insert_query = `INSERT INTO lists (listname, createdby,reason, createddate, updateddate) values (?, ?, ?, ?, ?)`;
 
         const createdDate = new moment().format('YYYY-MM-DD HH:MM');
         const updatedDate = new moment().format('YYYY-MM-DD HH:MM');
 
         db.transaction(tx =>{
-            tx.executeSql(insert_query,['listname','germain',createdDate,updatedDate]);
+            tx.executeSql(insert_query,['listname','germain','Whats your purpose',createdDate,updatedDate]);
         },  error => 
             {
                 console.log("db error inserting list");
@@ -77,11 +78,12 @@ const db = SQLite.openDatabase('db.todoer');
         )
     }
 
-    const retrieveList = () => {
+    const retrieveList = (setListOfList) => {
         const get_query = `SELECT * FROM lists`;
+        let results = {};
 
         db.transaction(tx =>{
-            tx.executeSql(get_query,[],(txobj,resultset) =>{console.log(resultset)} , (txobj,resultset) =>{console.log(resultset)});
+            tx.executeSql(get_query,[],(txobj,resultset) =>{console.log(resultset); setListOfList(resultset)} , (txobj,error) =>{console.log(error);});
         },  error => 
             {
             console.log("db error retrieving from database");
@@ -91,6 +93,8 @@ const db = SQLite.openDatabase('db.todoer');
             () => 
             {
             console.log('successfully retrieved from database ')
+            console.log(results)
+            return results;
             }
         )
 

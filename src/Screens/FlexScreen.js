@@ -179,7 +179,7 @@ function FlexMultipleRowsTodoerHeader () {
 {/* A note thhat you can also use flex her instead of height and width in the out row view just use flex:1 in both spots */}
 
                 <View style={{flexDirection: 'row',flex: 1}}>
-                  <TodoerAppHeader></TodoerAppHeader>
+                  <TodoerAppHeader headerType='Events' addButtonText='Add Event'/>
                 </View>
 
                 <View style={{flexDirection: 'row',flex: 2}}>

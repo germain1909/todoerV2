@@ -7,9 +7,10 @@ import styled from 'styled-components/native'
 // import {CalendarScreen} from './src/Screens/CalendarsScreen.js'
 import {FlexScreen} from './src/Screens/FlexScreen.js'
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
-import {colors} from './src/Utilities/colors'
-import {ListScreen} from './src/Screens/ListScreen'
-
+import {colors} from './src/Utilities/colors';
+import {ListScreen} from './src/Screens/ListScreen';
+import {TodoerAppHeader} from './src/Utilities/TodoerAppHeader';
+import {TestScreen} from './src/Screens/TestScreen'
 
 
 
@@ -35,12 +36,25 @@ export const ButtonContainer = styled.TouchableOpacity`
 `;
 function EventsScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Events</Text>
-      <StyledText>Text</StyledText>
-      <ButtonContainer><StyledButtonText>Text</StyledButtonText></ButtonContainer>
+    <SafeAreaView style={{
+      flex: 1,
+      flexDirection: 'column', //column is the default
+      justifyContent: 'flex-start',
+      alignItems: 'baseline',
+      width:"100%",
+      height:"100%",
+      backgroundColor:colors.light
+  }}>
+
+    <View style={{flexDirection: 'row',flex: 1}}>
+      <TodoerAppHeader headerType='Calendars' addButtonText='Add Calendar'/>
+    </View>
+
+    <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
       <CalendarList/>
     </View>
+
+    </SafeAreaView>
   );
 }
 
@@ -74,7 +88,6 @@ function EventsScreen() {
 
 const Tab = createBottomTabNavigator();
 
-
 export default function App() {
   return (
     <NavigationContainer>
@@ -82,11 +95,13 @@ export default function App() {
         <Tab.Screen name="Calendars" component={EventsScreen} />
         <Tab.Screen name="All Events" component={FlexScreen} />
         <Tab.Screen name="Lists" component={ListScreen} />
+        <Tab.Screen name="Test" component={TestScreen} />
         {/* <Tab.Screen name="Calendars" component={CalendarScreen} />
         <Tab.Screen name="All Events" component={EventsScreen} />
         <Tab.Screen name="Lists" component={FlexScreen} /> */}
         
       </Tab.Navigator>
+
     </NavigationContainer>
     
   );
