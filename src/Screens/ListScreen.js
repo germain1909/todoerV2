@@ -20,6 +20,7 @@ import { TodoList } from "../Components/TodoListComponents/TodoList";
 import { useDatabase } from "../Utilities/database/useDatabase";
 import { ListOfList } from "../Components/TodoListComponents/ListOfList";
 import { createStackNavigator } from "@react-navigation/stack";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 
 const TodoListCardContainer = styled.View`
@@ -58,6 +59,7 @@ const KeyboardDismiss = styled.TouchableWithoutFeedback`
 `;
 
 const RootStack = createStackNavigator()
+
 
 export function ListComponent({ navigation }) {
   const [addListModalVisible, setAddListModalVisible] = useState(false);
@@ -109,16 +111,27 @@ export function ListComponent({ navigation }) {
 export function ListScreen() {
   return (
     <RootStack.Navigator mode="modal" screenOptions={{
-      headerShown: false,
-      cardStyle: { backgroundColor: 'transparent' }
+      // headerShown: false,
+      // cardStyle: { backgroundColor: 'transparent' }
     }} >
-      <RootStack.Screen name="MyList" component={ListComponent} />
-      <RootStack.Screen name="MyModal" component={ModalScreen} />
+      <RootStack.Screen name="MyList" component={ListComponent} options={{
+          headerShown: false,
+        }}  />
+      <RootStack.Screen name="MyModal" component={ModalScreen} options={{
+          headerShown: false,
+          cardStyle: { backgroundColor: 'transparent' }
+        }}/>
+      <RootStack.Screen name="Home" component={DetailsScreen} />
     </RootStack.Navigator>
   );
 }
 
 function ModalScreen({ navigation }) {
+
+  const goToDetails = () =>{
+    navigation.navigate('Home')
+  };
+
   return (
     <View
     style={{
@@ -136,7 +149,8 @@ function ModalScreen({ navigation }) {
         <Text style={{ fontSize: 30 }}>This is a modal!</Text>
         {/* <Button onPress={() => navigation.goBack()} title="Dismiss" /> */}
       </View>
-
+      {/* <DetailsScreen/> */}
+      <TouchableOpacity onPress={() => {goToDetails()} }>< Text style={{fontSize:40}} >Hey</Text></TouchableOpacity>
       <View style={{ flex: 2 }}>
         <ModalTextInputLabel>Title of List</ModalTextInputLabel>
         <KeyboardDismiss>
@@ -157,3 +171,28 @@ function ModalScreen({ navigation }) {
     </View>
   );
 }
+
+
+
+function DetailsScreen({navigation}) {
+
+  return (
+    <View
+    style={{
+      height: "88%",
+      marginTop: "auto",
+      backgroundColor: colors.dark,
+      borderTopLeftRadius: 20,
+      borderTopRightRadius: 20,
+      overflow: "hidden",
+      padding: 10,
+    }}
+    >
+      <Text>Details</Text>
+    </View>
+  );
+}
+
+
+
+
