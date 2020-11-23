@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { colors } from "./colors";
 import { useFocusEffect } from "@react-navigation/core";
 import * as Font from "expo-font";
+import * as Svg from 'react-native-svg';
 
 //styled header is just a view at the end of the
 const StyledHeader = styled.View`
@@ -36,6 +37,12 @@ const StyledButtonText = styled.Text`
 `;
 
 const AppHeaderNameText = styled.Text``;
+const StyledAppHeaderImage = styled.Image`
+margin-top:10px;
+height:50px;
+width:100px;
+
+`;
 
 export function TodoerAppHeader(props) {
   const { headerType, addButtonText, addButtonFunction } = props;
@@ -43,15 +50,7 @@ export function TodoerAppHeader(props) {
   return (
     <StyledHeader>
       <View style={{ flexDirection: "row", flex: 1, justifyContent: "center" }}>
-        <AppHeaderNameText
-          style={{
-            fontFamily: "Kohinoor Bangla",
-            fontSize: 35,
-            color: "white",
-          }}
-        >
-          TODOER
-        </AppHeaderNameText>
+      <StyledAppHeaderImage source={require('./img/todoerPSDExport.psd')}/>
       </View>
       <View style={{ flexDirection: "row", flex: 1 }}>
         <SelectButtonButtonContainer>

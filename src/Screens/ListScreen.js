@@ -24,13 +24,13 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 
 const TodoListCardContainer = styled.View`
-  backgroundcolor: ${colors.dark};
+  backgroundColor: ${colors.dark};
   flex: 1;
-  bordertopleftradius: 10px;
-  bordertoprightradius: 10px;
-  marginleft: 10px;
-  marginright: 10px;
-  margintop: 10px;
+  borderTopLeftRadius: 10px;
+  borderTopRightRadius: 10px;
+  marginLeft: 10px;
+  marginRight: 10px;
+  marginTop: 10px;
 `;
 
 const ModalTextInputLabel = styled.Text`
@@ -99,9 +99,9 @@ export function ListComponent({ navigation }) {
           flexDirection: "column",
         }}
       >
-        {/* <TodoListCardContainer>
+        <TodoListCardContainer>
                 <TodoList style={{flex: 1}}/>
-        </TodoListCardContainer>  */}
+        </TodoListCardContainer>
         <ListOfList></ListOfList>
       </View>
     </SafeAreaView>
