@@ -21,17 +21,9 @@ import { useDatabase } from "../Utilities/database/useDatabase";
 import { ListOfList } from "../Components/TodoListComponents/ListOfList";
 import { createStackNavigator } from "@react-navigation/stack";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import {database} from '../Utilities/database/database'
 
 
-const TodoListCardContainer = styled.View`
-  backgroundColor: ${colors.dark};
-  flex: 1;
-  borderTopLeftRadius: 10px;
-  borderTopRightRadius: 10px;
-  marginLeft: 10px;
-  marginRight: 10px;
-  marginTop: 10px;
-`;
 
 const ModalTextInputLabel = styled.Text`
   color: ${colors.text};
@@ -63,13 +55,23 @@ const RootStack = createStackNavigator()
 
 export function ListComponent({ navigation }) {
   const [addListModalVisible, setAddListModalVisible] = useState(false);
-
-  useDatabase();
+  const [listOfListArray,setListOfList] = useState({});
 
   const handleAddList = () => {
     // setAddListModalVisible(true);
     navigation.navigate('MyModal');
   };
+
+  const submitCreateNewList = () => {
+    console.log('inserted')
+    database.insertList();
+    database.retrieveList(setListOfList);
+  }
+
+  useEffect(()=>{  
+    database.insertList();
+    database.retrieveList(setListOfList)
+  },[])
 
   return (
     <SafeAreaView
@@ -99,10 +101,8 @@ export function ListComponent({ navigation }) {
           flexDirection: "column",
         }}
       >
-        <TodoListCardContainer>
-                <TodoList style={{flex: 1}}/>
-        </TodoListCardContainer>
-        <ListOfList></ListOfList>
+        
+        <ListOfList listOfListArray={listOfListArray}></ListOfList>
       </View>
     </SafeAreaView>
   );
@@ -162,6 +162,7 @@ function ModalScreen({ navigation }) {
         <ModalTextInput />
       </View>
       <View style={{ flex: 6 }}>
+      <TouchableOpacity onPress={() => {goToDetails()} }>< Text style={{fontSize:40}} >Hey</Text></TouchableOpacity>
         <ScrollView>
           <ModalTextInputLabel>
             Add your first 5 todos. Add more todos after you hit the Done Button
