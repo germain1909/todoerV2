@@ -4,7 +4,6 @@ import { StyleSheet, Text, View } from "react-native";
 import { colors } from "./colors";
 import { useFocusEffect } from "@react-navigation/core";
 import * as Font from "expo-font";
-import * as Svg from 'react-native-svg';
 
 //styled header is just a view at the end of the
 const StyledHeader = styled.View`

@@ -6,8 +6,9 @@ const db = SQLite.openDatabase('db.todoer');
 
     // we are only going to drop the tables on dev we wont use this function on prod 
     const dropTables  = () => {
+        console.log('Germain dropped tables');
         return new Promise((resolve,reject) => {
-            const drop_table_query = 'drop table lists';
+            const drop_table_query = 'DROP TABLE IF EXISTS lists';
 
             db.transaction(tx =>{
                 tx.executeSql(drop_table_query);
@@ -30,6 +31,7 @@ const db = SQLite.openDatabase('db.todoer');
 
 //whichever one of these resolve or reject that comes out of here will be returned
     const createTables  = () => {
+        console.log('Germain created tables');
         return new Promise((resolve,reject) => {
             const create_table_query = `CREATE TABLE IF NOT EXISTS lists(listid INTEGER PRIMARY KEY AUTOINCREMENT,
                 listname TEXT,
@@ -83,7 +85,7 @@ const db = SQLite.openDatabase('db.todoer');
         let results = {};
 
         db.transaction(tx =>{
-            tx.executeSql(get_query,[],(txobj,resultset) =>{console.log(resultset); setListOfList(resultset)} , (txobj,error) =>{console.log(error);});
+            tx.executeSql(get_query,[],(txobj,resultset) =>{console.log('LLLLLLLLLL',resultset); setListOfList(resultset)} , (txobj,error) =>{console.log(error);});
         },  error => 
             {
             console.log("db error retrieving from database");

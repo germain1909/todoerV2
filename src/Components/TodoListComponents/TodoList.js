@@ -6,6 +6,17 @@ import {TodoInsert} from './TodoInsert'
 import {database}  from '../../Utilities/database/database'
 import {useDatabase} from '../../Utilities/database/useDatabase'
 
+
+const TodoListCardContainer = styled.View`
+  backgroundColor: ${colors.dark};
+  flex: 1;
+  borderTopLeftRadius: 10px;
+  borderTopRightRadius: 10px;
+  marginLeft: 10px;
+  marginRight: 10px;
+  marginTop: 10px;
+`;
+
 export function TodoList() {
     const [todos, setTodos] = useState([{text:'germaio',key:1}])
     const [value, setValue] = useState('')

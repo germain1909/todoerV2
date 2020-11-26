@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -11,7 +11,8 @@ import {colors} from './src/Utilities/colors';
 import {ListScreen} from './src/Screens/ListScreen';
 import {TodoerAppHeader} from './src/Utilities/TodoerAppHeader';
 import {TestScreen} from './src/Screens/TestScreen'
-
+import {useDatabase} from './src/Utilities/database/useDatabase'
+import {database} from './src/Utilities/database/database'
 
 
 export const StyledText = styled.Text`
@@ -89,6 +90,10 @@ function EventsScreen() {
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+
+  console.log('inserted at beginning of app creation ')
+  useDatabase();
+  
   return (
     <NavigationContainer>
       <Tab.Navigator>
